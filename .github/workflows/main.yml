@@ -31,4 +31,4 @@ jobs:
 
       - name: Compile ESP32 sketch
         run: |
-          arduino-cli compile --fqbn esp32:esp32:esp32 UART0_loopback
+          arduino-cli compile --fqbn esp32:esp32:esp32 uart_loopback
