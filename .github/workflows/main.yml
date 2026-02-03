@@ -10,21 +10,12 @@ jobs:
   flash:
     runs-on: self-hosted
 
-    defaults:
-      run:
-        shell: cmd
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show runner info (debug)
+      - name: Flash ESP32 (force CMD)
+        shell: cmd
         run: |
-          echo Running on %COMPUTERNAME%
-          echo Current directory:
-          cd
-
-      - name: Flash ESP32
-        run: |
-          echo Starting ESP32 Flash
+          echo Flashing ESP32...
           esp32_flash.bat
