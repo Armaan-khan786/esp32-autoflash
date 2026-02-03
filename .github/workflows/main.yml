@@ -8,11 +8,22 @@ on:
 
 jobs:
   flash:
+    name: Flash ESP32 from Self-Hosted PC
     runs-on: self-hosted
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Show runner info (debug)
+        run: |
+          echo Running on %COMPUTERNAME%
+          echo Current directory:
+          cd
+
       - name: Flash ESP32
-        run: esp32_flash.bat
+        shell: cmd
+        run: |
+          echo Starting ESP32 flashing...
+          esp32_flash.bat
+          echo Flashing finished
