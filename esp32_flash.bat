@@ -5,7 +5,7 @@ echo ===============================
 
 set PORT=COM6
 set FQBN=esp32:esp32:esp32
-set SKETCH=loopback
+set SKETCH=uart_loopback
 
 arduino-cli.exe compile --fqbn %FQBN% %SKETCH%
 IF ERRORLEVEL 1 (
