@@ -18,4 +18,5 @@ jobs:
         shell: cmd
         run: |
           echo Flashing ESP32...
+          cd esp32-github-runner
           esp32_flash.bat
