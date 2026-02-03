@@ -1,4 +1,4 @@
-name: ESP32 Arduino Build
+name: ESP32 Auto Flash
 
 on:
   push:
@@ -7,38 +7,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  flash:
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Arduino CLI
-        run: |
-          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-          sudo mv bin/arduino-cli /usr/local/bin/arduino-cli
-
-      - name: Configure Arduino CLI
-        run: |
-          arduino-cli config init
-          arduino-cli config set board_manager.additional_urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
-
-      - name: Install ESP32 core
-        run: |
-          arduino-cli core update-index
-          arduino-cli core install esp32:esp32
-
-      - name: Compile ESP32 sketch
-        run: |
-          arduino-cli compile \
-            --fqbn esp32:esp32:esp32 \
-            --build-path build \
-            uart_loopback
-
-      - name: Upload firmware artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifact
-          path: |
-            build/**/*.bin
+      - name: Flash ESP32
+        run: esp32_flash.bat
