@@ -1,6 +1,9 @@
 name: ESP32 Auto Flash
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
@@ -8,15 +11,18 @@ on:
 
 jobs:
   flash:
+    name: Build & Flash ESP32
     runs-on: self-hosted
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Flash ESP32 (force CMD)
+      - name: Flash ESP32
         shell: cmd
         run: |
+          echo =========================
           echo Flashing ESP32...
-          cd esp32-github-runner
+          echo =========================
+          cd esp32-github-runner || exit /b 1
           esp32_flash.bat
